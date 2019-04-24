@@ -1,0 +1,28 @@
+<div class="agileits-main-grid">
+<% include ./partials/messages %>
+<div class="right-grid-w3ls text-center">
+	<h3>login</h3>
+	<form action="/users/login" method="POST">
+		<div class="img-grid1">
+			<img src="../images/2.png" alt=" " class="img-responsive" />
+		</div>
+		<div class="w3ls-icon">
+			<i class="fa fa-envelope" aria-hidden="true"></i>
+			<input type="email" class="user" name="email" placeholder="Email" required="" />
+		</div>
+		<div class="w3ls-icon">
+			<i class="fa fa-lock" aria-hidden="true"></i>
+			<input type="password" class="lock" name="password" placeholder="Password" required="" />
+		</div>
+		<input type="submit" value="login">
+    <p class="lead mt-4">
+      No Account? <a href="/users/register">Register</a>
+    </p>
+	</form>
+</div>
+</div>
+<div class="copy-right w3l-agile">
+	<p> 2019 All Rights Reserved | Design by week
+	</p>
+</div>
+<script src="../js/jquery-2.1.4.min.js"></script>
