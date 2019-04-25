@@ -1,5 +1,8 @@
 # memo_paper_server
 
+### Require
+You MUST have mongodb installed on the env that the app will run, and start the mongod process.
+
 ### Usage
 
 ```sh
