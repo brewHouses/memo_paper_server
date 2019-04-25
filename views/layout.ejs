@@ -25,8 +25,20 @@
       crossorigin="anonymous"
     ></script>
     -->
-    <script
-      src="../js/bootstrap.min.js"
-    ></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/md5.js"></script>
+    <script>
+      $(document).ready(c => {
+        $("#submit_btn").click(function(){
+          if ($_password = $("#password")){
+            $_password.val(hex_md5($_password.val()))
+          }
+          if ($_password2 = $("#password2")){
+            $_password2.val(hex_md5($_password2.val()))
+          }
+        });
+      });
+    </script>
   </body>
 </html>
