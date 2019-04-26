@@ -19,4 +19,5 @@ $ npm run dev
 
 ### TODO
 
-- add MD5 to the front password
+- After md5, use ajex to transport username and password to server and wait return code, if the code is ok, then redirect /dashboard, else report error.
+- Use the email to send the verification code, and replace the invitation code.// Or use the ink paper display the QR code when the first use, the user need to scan the QR code and get a number or some code else, when the user register, he/she need to input the code and the email verification code.
