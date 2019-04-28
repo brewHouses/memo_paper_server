@@ -81,12 +81,19 @@ router.post('/register', (req, res) => {
   }
 });
 
+
 // Login
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/users/login',
-    failureFlash: true
+  passport.authenticate('local', {failureFlash: true }, (err, user, info) => {
+    if(err)
+      return res.json({"status": false, "message": info.message});
+    if(user === false)
+      return res.json({"status": false, "message": info.message});
+    req.logIn(user, function(err) {
+      if (err)
+        return res.json({"status": false, "message": info.message});
+      return res.json({"status": true});
+    });
   })(req, res, next);
 });
 

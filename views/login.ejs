@@ -1,4 +1,4 @@
-<div class="agileits-main-grid">
+<div id="main_div" class="agileits-main-grid">
 <% include ./partials/messages %>
 <div class="right-grid-w3ls text-center">
 	<h3>login</h3>
@@ -10,6 +10,7 @@
 			<i class="fa fa-envelope" aria-hidden="true"></i>
 			<input
 				type="email"
+				id="email"
 				class="user"
 				name="email"
 				placeholder="Email"
@@ -25,7 +26,7 @@
 				placeholder="Password"
 				required="" />
 		</div>
-		<input id="submit_btn" type="submit" value="login">
+		<input type="submit" id="submit_btn" value="login">
     <p class="lead mt-4">
       No Account? <a href="/users/register">Register</a>
     </p>
@@ -36,3 +37,39 @@
 	<p> 2019 All Rights Reserved | Design by week
 	</p>
 </div>
+<script src="../js/md5.js"></script>
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(c => {
+		$("#submit_btn").click(function(){
+			email = $("#email").val();
+			password = hex_md5($("#password").val());
+			$.ajax({
+				url: '/users/login',
+				type: 'POST',
+				dataType: 'json',
+				data: {"email": email, "password": password},
+				timeout: 1000,
+				cache: false,
+			}).done(function( data ) {
+				if(data.status)
+					window.location.href='/dashboard'
+				else{
+					if($error_alert=$("#error_alert"))
+						$error_alert.remove()
+					var alert_info = $('<div class="alert  alert-danger" id="error_alert">	\
+						                  	<a href="#" class="close" data-dismiss="alert">\
+																	&times;\
+																</a>\
+																<strong>ERROR! </strong>'
+																+data.message+
+														'</div>');
+					$("#main_div").prepend(alert_info);
+				}
+    	}
+		);
+		return false
+	});
+});
+</script>
