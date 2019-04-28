@@ -1,5 +1,7 @@
 # memo_paper_server
 
+An electronic reminder, which would help you record things that flashed through your brain and recall them even if you reach to the edage of the galaxy with your wifi adaptor. Sounds amazing :).  
+
 ### Require
 You MUST have mongodb installed on the env that the app will run, and start the mongod process.
 
