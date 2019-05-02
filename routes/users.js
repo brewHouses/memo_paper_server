@@ -8,10 +8,10 @@ const User = require('../models/User');
 const { forwardAuthenticated } = require('../config/auth');
 
 // Login Page
-router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
+router.get('/login', forwardAuthenticated, (req, res) => res.render('login', {layout: "layouts/layout"}));
 
 // Register Page
-router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
+router.get('/register', forwardAuthenticated, (req, res) => res.render('register', {layout: "layouts/layout"}));
 
 // Register
 router.post('/register', (req, res) => {
@@ -36,6 +36,7 @@ router.post('/register', (req, res) => {
 
   if (errors.length > 0) {
     res.render('register', {
+      layout: "layouts/layout",
       errors,
       name,
       email,
@@ -47,6 +48,7 @@ router.post('/register', (req, res) => {
       if (user) {
         errors.push({ msg: 'Email already exists' });
         res.render('register', {
+          layout: "layouts/layout",
           errors,
           name,
           email,

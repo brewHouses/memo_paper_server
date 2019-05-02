@@ -28,7 +28,7 @@ app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
 // Express body parser
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 // Express session
 app.use(
@@ -60,6 +60,26 @@ app.use(function(req, res, next) {
 // Routes
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users.js'));
+
+app.get('/404', function(req, res, next){
+  next();
+});
+
+app.use(function(req, res, next){
+  res.status(404);
+
+  res.format({
+    html: function () {
+      res.render('404', { url: req.url, layout: "layouts/err" });
+    },
+    json: function () {
+      res.json({ error: 'Not found' })
+    },
+    default: function () {
+      res.type('txt').send('Not found')
+    }
+  })
+});
 
 const PORT = process.env.PORT || 8000;
 
