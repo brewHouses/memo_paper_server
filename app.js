@@ -73,13 +73,41 @@ app.use(function(req, res, next){
       res.render('404', { url: req.url, layout: "layouts/err" });
     },
     json: function () {
-      res.json({ error: 'Not found' })
+      res.json({ error: '404 Not found' })
     },
     default: function () {
-      res.type('txt').send('Not found')
+      res.type('txt').send('404 Not found')
     }
   })
 });
+
+app.use(function(err, req, res, next){
+  res.status(500);
+
+  res.format({
+    html: function () {
+      res.render('500', { url: req.url, layout: "layouts/err" });
+    },
+    json: function () {
+      res.json({ error: '500 Internal Server Error' })
+    },
+    default: function () {
+      res.type('txt').send('500 Internal Server Error')
+    }
+  })
+});
+
+function errorHandler (err, req, res, next) {
+  if (res.headersSent) {
+    return next(err)
+  }
+  res.status(500)
+  //res.render('error', { error: err })
+  res.render('500', { url: req.url, layout: "layouts/err" });
+}
+
+app.use(errorHandler)
+
 
 const PORT = process.env.PORT || 8000;
 
