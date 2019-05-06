@@ -1,7 +1,36 @@
 # memo_paper_server
 
 ### Require
-You MUST have mongodb installed on the env that the app will run, and start the mongod process.
+
+- This application is based on the nodejs, so the npm you must installed:
+  ```sh
+  $sudo apt-get install npm
+  $npm -v #to check the version installed 
+  ```
+  If you want to upgrade the npm version:
+  ```sh
+  sudo npm install npm -g
+  ```
+
+- We recommand to use the latest version of nodejs, the default version in Ubuntu 16 LTS is "out of style". 
+  There is a powerful tool ("n") used to choose what nodejs version you want to install. 
+  "n" can be installed using npm simply by running the following command:
+  ```sh
+  $ npm install n
+  ```
+  After installing n, you can switch between different versions of NodeJS installations as follows:
+  ```sh
+  $ n list
+  $ n xxx #install nodejs according to xxx which is replaced by whatever version list above
+  $ n use xxx #choose the version you installed 
+  ```
+  You can use `node -v` to check the version.
+
+- mongodb is the database we used, so you'd better install that and start the deamon:
+  ```sh
+  sudo npm install mongodb
+  sudo systemctl start mongodb.service #Make sure the deamon started.
+  ```
 
 ### Usage
 
