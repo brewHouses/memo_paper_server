@@ -52,9 +52,9 @@ $ npm run dev
 - Add the lovers mode, so the lover can reminde each other by the application and the message will show on the ink display.
 
 ### The Function will have
-[] memo
-[] Weather forecast
-[] clock
+- [] memo
+- [] Weather forecast
+- [] clock
 
 
 ### TODO
