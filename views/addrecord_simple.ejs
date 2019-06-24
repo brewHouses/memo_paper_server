@@ -1,0 +1,53 @@
+<body>
+<div style="margin: 15px;">
+	<form class="layui-form" action="/addrecord/simple" method="POST">
+		<div class="layui-form-item">
+			<label class="layui-form-label">Memo entry</label>
+			<div class="layui-input-block">
+				<input type="text" name="memo_entry" lay-verify="title" autocomplete="off" placeholder="Please input the memo entry" class="layui-input">
+			</div>
+		</div>
+
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-submit="" lay-filter="demo1">Submit</button>
+					<button type="reset" class="layui-btn layui-btn-primary">Reset</button>
+				</div>
+			</div>
+	</form>
+</div>
+
+<script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script>
+	layui.use(['form', 'layedit', 'laydate'], function() {
+		var form = layui.form(),
+			layer = layui.layer,
+			layedit = layui.layedit,
+			laydate = layui.laydate;
+
+		//创建一个编辑器
+		var editIndex = layedit.build('LAY_demo_editor');
+		//自定义验证规则
+		form.verify({
+			title: function(value) {
+				if(value.length < 1) {
+					return "The Memo Entry can't be empty!";
+				}
+			},
+			/*
+			pass: [/(.+){6,12}$/, '密码必须6到12位'],
+			*/
+			content: function(value) {
+				layedit.sync(editIndex);
+			}
+		});
+
+		//监听提交
+		form.on('submit(demo1)', function(data) {
+			layer.alert(JSON.stringify(data.field), {
+				title: '最终的提交信息'
+			})
+			return false;
+		});
+	});
+</script>

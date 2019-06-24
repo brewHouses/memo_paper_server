@@ -1,11 +1,14 @@
 <div class="admin-main">
 
 	<blockquote class="layui-elem-quote">
-		<a href="javascript:add_item();" class="layui-btn layui-btn-small" id="add">
-			<i class="layui-icon">&#xe608;</i> 添加信息
+		<a class="layui-btn layui-btn-small" id="add">
+			<i class="layui-icon">&#xe608;</i> Add Memo Entry
 		</a>
-		<a href="javascript:;" class="layui-btn layui-btn-small" id="search">
-			<i class="layui-icon">&#xe615;</i> 搜索
+		<a href="javascript:add_item();" class="layui-btn layui-btn-small">
+			<i class="layui-icon">&#xe608;</i> Add in detail
+		</a>
+		<a href="javascript:layer.alert('Not implete yet');" class="layui-btn layui-btn-small" id="search">
+			<i class="layui-icon">&#xe615;</i> search
 		</a>
 	</blockquote>
 	<fieldset class="layui-elem-field">
@@ -92,18 +95,13 @@
 			}
 		});
 
-		$('#search').on('click', function() {
-			parent.layer.alert('你点击了搜索按钮')
-		});
-
 		$('#add').on('click', function() {
-			$.get('temp/edit-form.html', null, function(form) {
+			$.get('/addrecord/simple', null, function(form) {
 				layer.open({
 					type: 1,
-					title: '添加表单',
+					title: 'Add Memo Entry',
 					content: form,
-					btn: ['保存', '取消'],
-					area: ['600px', '400px'],
+					area: ['600px', '200px'],
 					maxmin: true,
 					yes: function(index) {
 						console.log(index);
@@ -155,7 +153,7 @@
 	});
 
 	function add_item(){
-		alert(100)
-		$('#main_div').children("iframe").attr("src", "form.html")
+		// It's very trick to get the parent's elements
+		$('#main_iframe', parent.document).attr('src','/addrecord')
 	}
 </script>

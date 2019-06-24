@@ -14,23 +14,37 @@ const MemoRecordSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  status: {
-    type: String,
-    enum: ['not', 'done'],
-    default: 'memo'
-  },
   deadline: {
     type: Date,
   },
-  stick: {
+  class: {
+    type: String,
+    enum: ['study', 'life', 'other'],
+    default: 'other'
+  },
+  position: {
+    type: String
+  },
+  priority: {
+    type: String,
+    enum: ['high', 'normal', 'low'],
+    default: 'normal'
+  },
+  top: {
     type: Boolean,
     default: false
   },
-  class: {
+  comments: {
     type: String
-  }
+  },
+  status: {
+    type: String,
+    enum: ['not', 'done'],
+    default: 'not'
+  },
+
 });
 
-const User = mongoose.model('User', UserSchema);
+const MemoRecord = mongoose.model('MemoRecord', MemoRecordSchema);
 
-module.exports = User;
+module.exports = MemoRecord;
