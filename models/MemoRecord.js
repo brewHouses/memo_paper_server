@@ -13,6 +13,21 @@ const MemoRecordSchema = new mongoose.Schema({
   record: {
     type: String,
     required: true
+  },
+  status: {
+    type: String,
+    enum: ['not', 'done'],
+    default: 'memo'
+  },
+  deadline: {
+    type: Date,
+  },
+  stick: {
+    type: Boolean,
+    default: false
+  },
+  class: {
+    type: String
   }
 });
 

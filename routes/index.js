@@ -9,7 +9,7 @@ router.get('/', initAuthenticated, (req, res) => res.redirect('/dashboard'));
 router.get('/dashboard', ensureAuthenticated, (req, res) =>
   res.render('dashboard', {
     user: req.user,
-    layout: "layouts/layout"
+    layout: "layouts/layout_dashboard"
   })
 );
 
