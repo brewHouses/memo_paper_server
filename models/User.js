@@ -16,6 +16,19 @@ const UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  /*
+   * We just support one papaer for one user
+   * and the user must input the papaer id when register
+  */
+  paper_id: {
+    type: String,
+    required: true
+  },
+  mode: {
+    type: String,
+    enum: ['memo', 'weather', 'clock'],
+    default: 'memo'
   }
 });
 

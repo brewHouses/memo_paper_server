@@ -61,6 +61,16 @@
             value="<%= typeof invite_code != 'undefined' ? invite_code : '' %>"
           />
         </div>
+        <div class="form-group">
+          <label>Paper id</label>
+          <input
+            id="paper_id"
+            name="paper_id"
+            class="form-control"
+            placeholder="You can find the ID in your device"
+            value="<%= typeof paper_id != 'undefined' ? paper_id : '' %>"
+          />
+        </div>
         <button id="submit_btn" type="submit" class="btn btn-primary btn-block">
           Register
         </button>
