@@ -60,6 +60,7 @@ app.use(function(req, res, next) {
 // Routes
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users.js'));
+app.use('/records', require('./routes/records.js'));
 
 app.get('/404', function(req, res, next){
   next();
@@ -82,6 +83,7 @@ app.use(function(req, res, next){
 });
 
 app.use(function(err, req, res, next){
+  console.log(err);
   res.status(500);
 
   res.format({

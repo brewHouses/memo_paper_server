@@ -3,7 +3,8 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>Table</title>
+		<title>MEMO PAPER</title>
+		<script src="../js/jquery-3.3.1.min.js"></script>
 		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
 		<link rel="stylesheet" href="css/global.css" media="all">
 		<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
@@ -14,7 +15,7 @@
 		<div class="admin-main">
 
 			<blockquote class="layui-elem-quote">
-				<a href="javascript:;" class="layui-btn layui-btn-small" id="add">
+				<a href="javascript:add_item();" class="layui-btn layui-btn-small" id="add">
 					<i class="layui-icon">&#xe608;</i> 添加信息
 				</a>
 				<a href="javascript:;" class="layui-btn layui-btn-small" id="search">
@@ -166,6 +167,11 @@
 					$input.iCheck(event.currentTarget.checked ? 'check' : 'uncheck');
 				});
 			});
+
+			function add_item(){
+				alert(100)
+				$('#main_div').children("iframe").attr("src", "form.html")
+			}
 		</script>
 	</body>
 
