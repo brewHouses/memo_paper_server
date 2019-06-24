@@ -23,6 +23,9 @@ router.post('/', ensureAuthenticated, (req, res) => {
       req_class = "life"
     else if (req.body.class_other === "on")
       req_class = "other"
+    top = false
+    if(req.body.top === 'on')
+      top = true
     const newRecord = new MemoRecord({
       email: req.user.email,
       record: req.body.memo_entry,
@@ -30,7 +33,7 @@ router.post('/', ensureAuthenticated, (req, res) => {
       class: req_class,
       position: req.body.position,
       priority: req.body.priority,
-      top: req.body.top,
+      top: top,
       comments: req.body.comments,
       status: req.body.status
     })
