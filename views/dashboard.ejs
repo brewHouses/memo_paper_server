@@ -43,7 +43,7 @@
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
 								<img src="images/0.jpg" />
-								<span>beginner</span>
+								<span><%= user.name %></span>
 							</a>
 							<dl class="layui-nav-child">
 								<dd>
@@ -58,14 +58,14 @@
 									</a>
 								</dd>
 								<dd>
-									<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> logout</a>
+									<a href="/users/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> logout</a>
 								</dd>
 							</dl>
 						</li>
 					</ul>
 					<ul class="layui-nav admin-header-item-mobile">
 						<li class="layui-nav-item">
-							<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> logout</a>
+							<a href="/users/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> logout</a>
 						</li>
 					</ul>
 				</div>
@@ -82,8 +82,8 @@
 						</li>
 					</ul>
 					<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
-						<div class="layui-tab-item layui-show">
-							<iframe src="table.html"></iframe>
+						<div class="layui-tab-item layui-show id=main_div">
+							<iframe src="/records"></iframe>
 						</div>
 					</div>
 				</div>
