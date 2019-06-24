@@ -1,0 +1,123 @@
+<body>
+<div style="margin: 15px;">
+	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+		<legend>Add Memo</legend>
+	</fieldset>
+
+	<form class="layui-form" action="/addrecord" method="POST">
+		<div class="layui-form-item">
+			<label class="layui-form-label">Memo entry</label>
+			<div class="layui-input-block">
+				<input type="text" name="memo_entry" lay-verify="title" autocomplete="off" placeholder="Please input the memo entry" class="layui-input">
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">Dead Line</label>
+				<div class="layui-input-block">
+					<input type="text" name="dead_line" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+				</div>
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">Class</label>
+			<!--should be replaced by for loop in ejs-->
+			<div class="layui-input-block">
+				<input type="checkbox" name="class_studay" title="Study">
+				<input type="checkbox" name="class_life" title="Life">
+				<input type="checkbox" name="class_other" title="Other" checked="">
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">Position</label>
+				<div class="layui-input-block">
+					<input type="tel" name="position" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">Priority</label>
+			<div class="layui-input-inline">
+				<select name="priority">
+					<option value="">Select priority</option>
+						<option value="high">high</option>
+						<option value="normal" selected>normal</option>
+						<option value="low">low</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">Top</label>
+			<div class="layui-input-block">
+				<input type="checkbox" name="top" lay-skin="switch" title="switch">
+			</div>
+		</div>
+
+		<!--
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">普通文本域</label>
+			<div class="layui-input-block">
+				<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+			</div>
+		</div>
+		-->
+
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">Comments</label>
+			<div class="layui-input-block">
+				<textarea class="layui-textarea layui-hide" name="comments" lay-verify="content" id="LAY_demo_editor"></textarea>
+			</div>
+		</div>
+
+
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-submit="" lay-filter="demo1">Submit</button>
+					<button type="reset" class="layui-btn layui-btn-primary">Reset</button>
+				</div>
+			</div>
+	</form>
+</div>
+
+<script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script>
+	layui.use(['form', 'layedit', 'laydate'], function() {
+		var form = layui.form(),
+			layer = layui.layer,
+			layedit = layui.layedit,
+			laydate = layui.laydate;
+
+		//创建一个编辑器
+		var editIndex = layedit.build('LAY_demo_editor');
+		//自定义验证规则
+		form.verify({
+			title: function(value) {
+				if(value.length < 1) {
+					return "The Memo Entry can't be empty!";
+				}
+			},
+			/*
+			pass: [/(.+){6,12}$/, '密码必须6到12位'],
+			*/
+			content: function(value) {
+				layedit.sync(editIndex);
+			}
+		});
+
+		//监听提交
+		/*
+		form.on('submit(demo1)', function(data) {
+			layer.alert(JSON.stringify(data.field), {
+				title: '最终的提交信息'
+			})
+			return true;
+		});
+		*/
+	});
+</script>

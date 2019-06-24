@@ -61,6 +61,7 @@ app.use(function(req, res, next) {
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users.js'));
 app.use('/records', require('./routes/records.js'));
+app.use('/addrecord', require('./routes/addrecord.js'));
 
 app.get('/404', function(req, res, next){
   next();
