@@ -25,36 +25,27 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td style="text-align:center;"><i class="layui-icon" style="color:green;"></i></td>
-						<td>Layui</td>
-						<td>
-							<a href="/manage/article_edit_1">写作业。</a>
-						</td>
-						<td>2016-11-16 11:50</td>
+					<% records.forEach(function(record){%>
+						<tr>
+							<% if(record.top){ %>
+							<td style="text-align:center;"><i class="layui-icon" style="color:green;"></i></td>
+							<% } %>
+							<% if(!record.top){ %>
+							<td style="text-align:center;"><i class="layui-icon" style="color:red;">&#x1007</i></td>
+							<% } %>
+							<td><%=record.class %></td>
+							<td>
+								<a href="/manage/article_edit_1"><%=record.record %></a>
+							</td>
+							<td><%=record.date.toLocaleString() %></td>
+							<td>
+								<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">detail</a>
+								<a href="/manage/article_edit_1" class="layui-btn layui-btn-mini">modify</a>
+								<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">delete</a>
+							</td>
+						</tr>
+					<% }) %>
 
-
-						<td>
-							<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">详情</a>
-							<a href="/manage/article_edit_1" class="layui-btn layui-btn-mini">编辑</a>
-							<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
-						</td>
-					</tr>
-					<tr>
-						<td style="text-align:center;"><i class="layui-icon" style="color:green;"></i></td>
-						<td>Layui</td>
-						<td>
-							<a href="/manage/article_edit_1">考试</a>
-						</td>
-						<td>2016-11-16 11:50</td>
-
-
-						<td>
-							<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">详情</a>
-							<a href="/manage/article_edit_1" class="layui-btn layui-btn-mini">编辑</a>
-							<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
-						</td>
-					</tr>
 				</tbody>
 			</table>
 
