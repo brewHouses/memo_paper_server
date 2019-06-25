@@ -4,8 +4,22 @@ const { ensureAuthenticated, forwardAuthenticated, initAuthenticated } = require
 const MemoRecord = require('../models/MemoRecord');
 
 router.post('/', ensureAuthenticated, (req, res) => {
-    console.log(req.body);
-    res.end("OK");
+    MemoRecord.findById(req.body.id, function (err, record) {
+    if(err){
+        console.error(err);
+        res.end("Failed");
+    }else{
+      record.remove(function (err, r) {
+        if(err){
+            console.error(err);
+            res.end("Failed");
+        }else{
+            //console.log(r);
+        }
+      })
+    }
+  });
+  res.end("OK");
 });
 
 module.exports = router;
