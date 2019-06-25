@@ -108,6 +108,16 @@ layui.define(['element', 'common'], function(exports) {
 				});
 			});
 		}
+
+		var $ul = $container.children('ul');
+		$ul.find('li dl').each(function(){
+			$(this).on('click',function(){
+				// TODO: refresh two times; DONE
+				$('#main_iframe').attr('src', $(this).find("dd a").attr("data-url"));
+				//alert($(this).find("dd a").attr("data-url"))
+			});
+		});
+
 		return _that;
 	};
 	/**
@@ -134,6 +144,7 @@ layui.define(['element', 'common'], function(exports) {
 		var lIndex = events.indexOf('(');
 		var eventName = events.substr(0, lIndex);
 		var filter = events.substring(lIndex + 1, events.indexOf(')'));
+		/*
 		if(eventName === 'click') {
 			if(_con.attr('lay-filter') !== undefined) {
 				_con.children('ul').find('li').each(function() {
@@ -175,7 +186,7 @@ layui.define(['element', 'common'], function(exports) {
 					}
 				});
 			}
-		}
+		}*/
 	};
 	/**
 	 * 清除缓存
@@ -209,7 +220,7 @@ layui.define(['element', 'common'], function(exports) {
 				ulHtml += '<dl class="layui-nav-child">'
 				for(var j = 0; j < data[i].children.length; j++) {
 					ulHtml += '<dd>';
-					ulHtml += '<a href="javascript:;" data-url="' + data[i].children[j].href + '">';
+					ulHtml += '<a herf="javascript:;" data-url="' + data[i].children[j].href + '">';
 					if(data[i].children[j].icon !== undefined && data[i].children[j].icon !== '') {
 						if(data[i].children[j].icon.indexOf('fa-') !== -1) {
 							ulHtml += '<i class="fa ' + data[i].children[j].icon + '" data-icon="' + data[i].children[j].icon + '" aria-hidden="true"></i>';
