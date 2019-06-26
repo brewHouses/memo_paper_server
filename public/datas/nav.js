@@ -12,7 +12,7 @@ var navs = [{
 	"icon": "fa-cogs",
 	"spread": true,
 	"children": [{
-		"title": "Datatable",
+		"title": "Setting",
 		"icon": "fa-cogs",
 		"href": "/setting"
 	}]

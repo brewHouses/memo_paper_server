@@ -1,0 +1,106 @@
+<body>
+<div style="margin: 15px;">
+	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+		<legend>Setting</legend>
+	</fieldset>
+
+	<form class="layui-form" action="/setting" method="POST">
+
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">User Name</label>
+				<div class="layui-input-block">
+					<input type="tel" name="name" autocomplete="off" class="layui-input" id="name">
+				</div>
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">Email</label>
+				<div class="layui-input-block">
+					<input type="tel" name="email" autocomplete="off" class="layui-input" id="email" disabled placeholder="">
+				</div>
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">Paper ID</label>
+				<div class="layui-input-block">
+					<input type="tel" name="paper_id" autocomplete="off" class="layui-input" id="paper_id">
+				</div>
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">Mode</label>
+			<div class="layui-input-inline">
+				<select name="mode" id="mode">
+					<option value="">Please Select the mode</option>
+						<option value="memo" selected>memo</option>
+						<option value="weather">weather</option>
+						<option value="clock">clock</option>
+				</select>
+			</div>
+		</div>
+
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-submit="" lay-filter="demo1">Submit</button>
+					<button type="reset" class="layui-btn layui-btn-primary">Reset</button>
+				</div>
+			</div>
+	</form>
+</div>
+
+<script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script>
+
+	var set_info = (info) => {
+		info = JSON.parse(info);
+		$("#name").attr("value", info.name);
+		$("#email").attr("placeholder", info.email);
+		$("#paper_id").attr("value", info.paper_id);
+		$("#mode").val(info.mode);
+
+	}
+
+	$(document).ready(() => {
+		$.ajax({
+							url:"/api/user_info",
+							success:function(result){
+								if(result !== 'Failed')
+									set_info(result)
+								else
+									layer.alert('Something wrong!');
+								},
+								type: "POST",
+								//data: {id: id},
+						}
+		);
+	})
+
+
+	layui.use(['form', 'layedit', 'laydate'], function() {
+		var form = layui.form(),
+			layer = layui.layer,
+			layedit = layui.layedit,
+			laydate = layui.laydate;
+
+		//自定义验证规则
+		form.verify({
+			title: function(value) {
+				if(value.length < 1) {
+					return "The Memo Entry can't be empty!";
+				}
+			},
+
+			content: function(value) {
+				layedit.sync(editIndex);
+			}
+		});
+
+
+	});
+</script>
