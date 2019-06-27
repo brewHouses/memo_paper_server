@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
         const svg = textToSVG.getSVG(paper_id, options);
         svg2img(svg, {'width':400, 'height':300} , function(error, buffer) {
             //returns a Buffer
-            fs.writeFileSync('foo1.png', buffer);        
+            fs.writeFileSync('foo1.png', buffer);
             fs.createReadStream('foo1.png').pipe(new PNG()).on('parsed', function() {
               handle_bin_img(floydSteinberg(this).data, req, res);
             })
