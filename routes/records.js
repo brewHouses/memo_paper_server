@@ -5,10 +5,8 @@ const MemoRecord = require('../models/MemoRecord');
 
 // Default page of dashboard
 router.get('/', ensureAuthenticated, (req, res) => {
-  MemoRecord.find({ email: req.user.email }).then(records => {
+  MemoRecord.find({ email: req.user.email }, null, {sort:{date: -1}}).then(records => {
     // Mabe use other metod will improve the performance
-    if (records)
-      records.reverse()
     res.render('records', {
       records: records,
       layout: "layouts/layout_dashboard"

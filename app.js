@@ -69,6 +69,7 @@ app.use('/api/delete_record', require('./api/delete_record.js'));
 app.use('/api/user_info', require('./api/user_info.js'));
 app.use('/api/paper_hb_handler', require('./api/paper_hb_handler.js'));
 app.use('/api/paper_gen_code', require('./api/paper_gen_code.js'));
+app.use('/api/paper_hb_querry', require('./api/paper_hb_querry.js'));
 
 app.get('/404', function(req, res, next){
   next();

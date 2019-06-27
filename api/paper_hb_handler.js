@@ -5,15 +5,19 @@ const User = require('../models/User');
 
 router.post('/', (req, res) => {
     console.log(req.body);
-    // Data.now().toString()
-    User.findOne({ paper_id: paper_id }).then(user => {
+    // Data.now().getTime().toString()
+    User.findOne({ paper_id: req.body.paper_id }).then(user => {
         if(user){
-            if(req.body.update_time === user.date.toString())
+            if(req.body.update_time === "_"){
+              //console.log(user.date.toString())
+              res.end(String(user.date.getTime()))
+            }
+            if(req.body.update_time === user.date.getTime().toString())
               res.end('N')
             // in js, can compaer string with int number
-            if(req.body.update_time < user.date)
+            if(req.body.update_time < user.date.getTime())
               res.end('Y')
-            if(req.body.update_time > user.date)
+            if(req.body.update_time > user.date.getTime())
               res.end('W')
         }
         else{
