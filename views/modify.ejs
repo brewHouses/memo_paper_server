@@ -8,7 +8,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">Memo entry</label>
 			<div class="layui-input-block">
-				<input type="text" name="memo_entry" lay-verify="title" autocomplete="off" placeholder="<%- boddy.record %>" class="layui-input">
+				<input type="text" name="memo_entry" lay-verify="title" autocomplete="off" value="<%- boddy.record %>" class="layui-input">
 			</div>
 		</div>
 		<input type="hidden" name="item_id" value="<%- boddy._id %>">
@@ -17,7 +17,7 @@
 			<div class="layui-inline">
 				<label class="layui-form-label">Dead Line</label>
 				<div class="layui-input-block">
-					<input type="text" name="dead_line" placeholder="<%- boddy.date %>" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+					<input type="text" name="dead_line" value="<%- boddy.date %>" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
 				</div>
 			</div>
 		</div>
@@ -36,7 +36,7 @@
 			<div class="layui-inline">
 				<label class="layui-form-label">Position</label>
 				<div class="layui-input-block">
-					<input type="tel" name="position" autocomplete="off" class="layui-input" placeholder="<%- boddy.position %>">
+					<input type="tel" name="position" autocomplete="off" class="layui-input" value="<%- boddy.position %>">
 				</div>
 			</div>
 		</div>
@@ -72,7 +72,7 @@
 		<div class="layui-form-item layui-form-text">
 			<label class="layui-form-label">Comments</label>
 			<div class="layui-input-block">
-				<textarea class="layui-textarea layui-hide" name="comments" lay-verify="content" id="LAY_demo_editor"></textarea>
+				<textarea class="layui-textarea layui-hide" name="comments" lay-verify="content" id="LAY_demo_editor"><%- boddy.comment %></textarea>
 			</div>
 		</div>
 
