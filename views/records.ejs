@@ -12,16 +12,16 @@
 		</a>
 	</blockquote>
 	<fieldset class="layui-elem-field">
-		<legend>memorandum</legend>
+		<legend>Memo List</legend>
 		<div class="layui-field-box">
 			<table class="site-table table-hover">
 				<thead>
 					<tr>
 						<th><input type="checkbox" id="selected-all"></th>
-						<th>所属分类</th>
-						<th>内容</th>
-						<th>创建时间</th>
-						<th>操作</th>
+						<th>Classification</th>
+						<th>Contents</th>
+						<th>Date</th>
+						<th>Operation</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -35,7 +35,7 @@
 							<% } %>
 							<td><%=record.class %></td>
 							<td>
-								<a href="/manage/article_edit_1"><%=record.record %></a>
+								<a href="/detail?id=<%=record.id %>"><%=record.record %></a>
 							</td>
 							<td><%=record.date.toLocaleString() %></td>
 							<td>
