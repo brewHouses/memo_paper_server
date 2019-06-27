@@ -1,3 +1,4 @@
+// TODO: keep a long session or stream for mulit-users
 const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated, forwardAuthenticated, initAuthenticated } = require('../config/auth');
@@ -17,15 +18,10 @@ const options = {x: 0, y: 0, fontSize: 72, anchor: 'top', attributes: attributes
 
 var ascii = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p']
 
-var xxxx = 0
 router.post('/', (req, res) => {
     console.log(req.body);
     var paper_id = req.body.paper_id;
-    const svg = textToSVG.getSVG(paper_id, options);
-    svg2img(svg, {'width':400, 'height':300} , function(error, buffer) {
-        //returns a Buffer
-        fs.writeFileSync('foo1.png', buffer);
-    });
+    count = req.body.count
 
     function handle_bin_img(img){
         //img = img.bitmap.data;
@@ -45,21 +41,40 @@ router.post('/', (req, res) => {
             temp_index++
         }
         console.log('ret')
-        if(xxxx % 2 == 0){
+        if(count == '1'){
           console.log('a');
           res.end(ret.substring(0,15000));
         }
-        else {
+        if(count==2) {
           console.log('b');
           res.end(ret.substring(15000,30000));
         }
-        xxxx++;
         return ret;
     }
 
-    fs.createReadStream('foo1.png').pipe(new PNG()).on('parsed', function() {
-  		handle_bin_img(floydSteinberg(this).data);
-    })
+    // Search paper_id in db, if not find, then generate the image and encode
+    User.findOne({ paper_id: paper_id }).then(user => {
+    if (user) {
+      // Find the item, and don't need to generate image
+      res.end("Y");
+    } else {
+      if(count==='0')
+        res.end("F");
+      else{
+        const svg = textToSVG.getSVG(paper_id, options);
+        svg2img(svg, {'width':400, 'height':300} , function(error, buffer) {
+            //returns a Buffer
+            fs.writeFileSync('foo1.png', buffer);
+        });
+
+
+
+        fs.createReadStream('foo1.png').pipe(new PNG()).on('parsed', function() {
+          handle_bin_img(floydSteinberg(this).data);
+        })
+      }
+    }
+  });
 })
 
 module.exports = router;
