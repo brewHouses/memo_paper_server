@@ -36,6 +36,7 @@ router.post('/', ensureAuthenticated, (req, res) => {
     if(req.body.top === 'on')
       top = true
     const newRecord = new MemoRecord({
+		_id: req.id,
       email: req.user.email,
       record: req.body.memo_entry,
       deadline: req.body.deadline,
