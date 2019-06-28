@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
       handle_bin_img(Buffer.concat(sorted_lines), req, res);
     });
     User.findOne({ paper_id: req.body.paper_id }).then(user => {
-        if(user){
+        if(user && user.mode === "memo"){
             MemoRecord.find({ email: user.email }, null, {sort:{date: -1}}).then(records => {
             //console.log(records)
             var img_data;
@@ -44,9 +44,8 @@ router.post('/', (req, res) => {
               else
                 record = records[i].record
 
-
-              if(get_show_len(record) < 30){
-                let tmp_len = 30 - get_show_len(record);
+              if(get_show_len(record) < 40){
+                let tmp_len = 40 - get_show_len(record);
                 while(tmp_len--)
                   record += " "
               }
@@ -66,9 +65,16 @@ router.post('/', (req, res) => {
           });
         }
         else{
+        if(user && user.mode === "weather"){
+            fs.createReadStream("weather.png").pipe(new PNG()).on('parsed', function() {
+              handle_bin_img(floydSteinberg(this).data, req, res, 1);
+            })
+        }
+        else{
           // C represent can't find the device
           res.end("C")
         }
+      }
     });
 });
 

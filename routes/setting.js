@@ -19,8 +19,9 @@ router.post('/', ensureAuthenticated, (req, res) => {
       record.name = req.body.name
       record.paper_id = req.body.paper_id
       record.mode = req.body.mode
+      record.date = Date.now()
       record.save().then( () => {
-        res.redirect('/setting');
+        res.redirect('/records');
       })
     }
   })
