@@ -19,17 +19,23 @@ router.post('/', (req, res) => {
     // console.log(req.body);
     // Data.now().getTime().toString()
     var width = 400;
-    var height = 25;
+    var height = 30;
+    var total_lines = 300/height;
     var ep = new EventProxy();
-    ep.after("gotline", 12, function (lines) {
-      handle_bin_img(Buffer.concat(lines), req, res);
+    ep.after("gotline", total_lines, function (lines) {
+      lines.sort((a,b)=>{return a.index > b.index})
+      var sorted_lines = []
+      for(let i = 0; i < lines.length; i++){
+        sorted_lines.push(lines[i].data)
+      }
+      handle_bin_img(Buffer.concat(sorted_lines), req, res);
     });
     User.findOne({ paper_id: req.body.paper_id }).then(user => {
         if(user){
             MemoRecord.find({ email: user.email }, null, {sort:{date: -1}}).then(records => {
             //console.log(records)
             var img_data;
-            for(let i=0; i<12; i++){
+            for(let i=0; i<total_lines; i++){
 
               //record = records[i].record
 
@@ -53,7 +59,7 @@ router.post('/', (req, res) => {
                   fs.writeFileSync(img_name, buffer);
 
                   fs.createReadStream(img_name).pipe(new PNG()).on('parsed', function() {
-                    ep.emit('gotline', floydSteinberg(this).data);
+                    ep.emit('gotline', {data: floydSteinberg(this).data, index: i});
                   })
               });
             }
