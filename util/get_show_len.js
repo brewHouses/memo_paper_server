@@ -4,7 +4,7 @@ var get_show_len = (str) => {
   var strlen = 0;
   for (i of str) {
     if (half_char.indexOf(i) == -1){
-      strlen += 2;
+      strlen += 3;
     }
     else {
       strlen += 1;

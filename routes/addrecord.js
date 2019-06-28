@@ -6,7 +6,6 @@ const User = require('../models/User');
 
 function touch_user_date(email){
     User.findOne({ email: email }).then(user => {
-      console.log(user.date);
       user.date = Date.now()
       user.save()
     });
